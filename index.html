@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Miguel Sanz Jiménez - Gallery</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8efc22d7af.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <style>
+        body {
+            color: black;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: rgb(212, 241, 253);
+            height: 100vh;
+            text-align: center;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about-photos-top-container {
+            margin: 15px;
+        }
+
+        .about-photos {
+            max-width: 70%;
+            min-width: 300px;
+        }
+
+        .about-img {
+            width: 300px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            margin-bottom: 50px;
+        }
+
+        /*footer*/
+       footer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .footer-icon {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 20px;
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0;
+        }
+
+        .container {
+            margin-top: 30px;
+            max-width: 1200px;
+            width: 95%;
+        }
+
+        .slider-wrapper {
+            position: relative;
+        }
+
+        .slider-wrapper .slide-button {
+            position: absolute;
+            top: 40%;
+            outline: none;
+            border: none;
+            height: 50px;
+            width: 50px;
+            z-index: 5;
+            color: #fff;
+            display: flex;
+            cursor: pointer;
+            font-size: 2.2rem;
+            background: #0091ff;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slider-wrapper .slide-button:hover {
+            background: #366bbb;
+        }
+
+        .slider-wrapper .slide-button#prev-slide {
+            left: -25px;
+            display: none;
+        }
+
+        .slider-wrapper .slide-button#next-slide {
+            right: -25px;
+        }
+
+        .slider-wrapper .image-list {
+            display: grid;
+            grid-template-columns: repeat(19, 1fr);
+            gap: 18px;
+            font-size: 0;
+            list-style: none;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .slider-wrapper .image-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .image-container {
+            font-size: 1rem;
+        }
+
+        .image-container p {
+            margin-top: 15px;
+        }
+
+        .slider-wrapper .image-list .image-item {
+            max-width: 600px;
+            min-width: 300px;
+            max-height: 600px;
+            object-fit: cover;
+        }
+
+        .image-item {
+            width: 100%;
+        }
+
+        .container .slider-scrollbar {
+            height: 24px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-scrollbar .scrollbar-track {
+            background: #ccc;
+            width: 100%;
+            height: 2px;
+            display: flex;
+            align-items: center;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .slider-scrollbar:hover .scrollbar-track {
+            height: 4px;
+        }
+
+        .slider-scrollbar .scrollbar-thumb {
+            position: absolute;
+            background: #000;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            height: 100%;
+            cursor: grab;
+            border-radius: inherit;
+        }
+
+        .slider-scrollbar .scrollbar-thumb:active {
+            cursor: grabbing;
+            height: 8px;
+            top: -2px;
+        }
+
+        .slider-scrollbar .scrollbar-thumb::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -10px;
+            bottom: -10px;
+        }
+
+        /* Styles for mobile and tablets */
+        @media only screen and (max-width: 1023px) {
+            .slider-wrapper .slide-button {
+                display: none !important;
+            }
+
+            .slider-wrapper .image-list {
+                gap: 10px;
+                margin-bottom: 15px;
+                scroll-snap-type: x mandatory;
+            }
+
+            .slider-wrapper .image-list .image-item {
+                width: 280px;
+                height: 380px;
+            }
+
+            .slider-scrollbar .scrollbar-thumb {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="https://miguelsanzjimenez.github.io/home/">Miguel Sanz Jiménez</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://miguelsanzjimenez.github.io/home/">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://miguelsanzjimenez.github.io/about/">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://miguelsanzjimenez.github.io/translations/">Translations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://miguelsanzjimenez.github.io/media/">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://miguelsanzjimenez.github.io/education/">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://miguelsanzjimenez.github.io/gallery/">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://miguelsanzjimenez.github.io/contact/">Contact</a>
+                </li>
+            </ul>
+            </form>
+        </div>
+    </nav>
+
+    <section id="gallery">
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="gallery-container">
+            <h1>Gallery</h1>
+            <div class="container">
+                <div class="slider-wrapper">
+                    <button id="prev-slide" class="slide-button material-symbols-rounded">chevron_left</button>
+                    <div class="image-list">
+                    </div>
+                    <button id="next-slide" class="slide-button material-symbols-rounded">chevron_right</button>
+                </div>
+            </div>
+    </section>
+    <footer>
+        <p class="footer-text">Copyright &#169; <span class="year">2002</span> | Miguel Sanz Jiménez</p>
+        <img class="footer-icon" src="favicon.ico" alt="icon">
+    </footer>
+
+    <script>
+        const galleryWrapper = document.querySelector('.image-list');
+
+        const galleryImages = [
+            {
+                image: 'images/01-cosby.jpg',
+                text: 'Dr. Sanz Jiménez with noir writer S.A. Cosby'
+            },
+            {
+                image: 'images/02-cosby.jpg',
+                text: 'Dr. Sanz Jiménez with noir writer S.A. Cosby'
+            },
+            {
+                image: 'images/03-cosby.jpg',
+                text: 'Dr. Sanz Jiménez with noir writer S.A. Cosby'
+            },
+            {
+                image: 'images/04-winslow.jpg',
+                text: 'Dr. Sanz Jiménez with American crime writer Don Winslow'
+            },
+            {
+                image: 'images/05-silva.jpg',
+                text: 'Dr. Sanz Jiménez with writer Lorenzo Silva at Getafe Negro'
+            },
+            {
+                image: 'images/06-jones.jpg',
+                text: 'Dr. Sanz Jiménez with horror writer Stephen Graham Jones'
+            },
+            {
+                image: 'images/07-whitehead.jpg',
+                text: 'Dr. Sanz Jiménez meets Pulitzer-prize winner Colson Whitehead'
+            },
+            {
+                image: 'images/08-granada.jpg',
+                text: 'Dr. Sanz Jiménez sharing his research at Granada University'
+            },
+            {
+                image: 'images/09-everett.jpg',
+                text: 'Dr. Sanz Jiménez greets American novelist Percival Everett'
+            },
+            {
+                image: 'images/19-bilbao.jpg',
+                text: 'With writer and translator Jon Bilbao'
+            },
+            {
+                image: 'images/10-jaume.jpg',
+                text: 'Conference at Universitat Jaume I'
+            },
+            {
+                image: 'images/11-publishers.jpg',
+                text: 'Spanish publishers and Dr. Sanz Jiménez talk to students at Complutense University'
+            },
+            {
+                image: 'images/12-malaga.jpg',
+                text: 'Dr. Sanz Jiménez discusses his research at the University of Málaga'
+            },
+            {
+                image: 'images/13-belfast.jpg',
+                text: 'Dr. Sanz Jiménez in Belfast'
+            },
+            {
+                image: 'images/14-feria.jpg',
+                text: "At Madrid's Feria del Libro, Dr. Sanz Jiménez signs his books"
+
+            },
+            {
+                image: 'images/15-auster.jpg',
+                text: 'Dr. Sanz Jiménez meets American writer Paul Auster'
+            },
+            {
+                image: 'images/16-alcala.jpg',
+                text: 'Dr. Sanz Jiménez sharing his research at Alcalá University'
+            },
+            {
+                image: 'images/17-antolin.jpg',
+                text: 'Dr. Sanz Jiménez attends a lecture by Spanish translator Mariano Antolín Rato'
+            },
+            {
+                image: 'images/18-cantabria.jpg',
+                text: 'Dr. Sanz Jiménez discusses his research at the University of Cantabria'
+            }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let generateHtml = galleryImages.map((item) => {
+                return ` 
+        <div class="image-container">                  
+            <img src="${item.image}" alt="" class="image-item">
+            <p>${item.text}</p>
+            </div> 
+
+ `
+            })
+
+            galleryWrapper.innerHTML = generateHtml.join('');
+        })
+
+        const initSlider = () => {
+            const imageList = document.querySelector(".slider-wrapper .image-list");
+            const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");
+            const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+
+            // Slide images according to the slide button clicks
+            slideButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const direction = button.id === "prev-slide" ? -1 : 1;
+                    const scrollAmount = imageList.clientWidth * direction;
+                    imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+                });
+            });
+
+            // Show or hide slide buttons based on scroll position
+            const handleSlideButtons = () => {
+                slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "flex";
+                slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
+            }
+
+
+            // Call these two functions when image list scrolls
+            imageList.addEventListener("scroll", () => {
+                handleSlideButtons();
+            });
+        }
+
+        window.addEventListener("resize", initSlider);
+        window.addEventListener("load", initSlider);
+
+
+
+
+        const year = document.querySelector('.year');
+        const currentYear = new Date().getFullYear();
+
+        year.innerHTML = currentYear;
+
+
+    </script>
+
+</body>
+
+</html>
